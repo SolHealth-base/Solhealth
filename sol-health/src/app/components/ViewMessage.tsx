@@ -16,17 +16,17 @@ const Message = ({ text, userId } : {
     )
 }
 
-const Messages = () => {
+const Messages = ({ msg } :{
+    msg: any[]
+}) => {
 
   return (
     <div className="mt-4">
-        <Message text="hey" userId="L7egZf4DoZOYLeHLwN8ZAaKNg4o1"/>
-        <Message text="hey" userId="ai"/>
-        <Message text="What's up?" userId="L7egZf4DoZOYLeHLwN8ZAaKNg4o1"/>
-        <Message text="I've been trying to get hold of you since" userId="L7egZf4DoZOYLeHLwN8ZAaKNg4o1"/>
-        <Message text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque enim quaerat, quas excepturi temporibus consectetur maiores deleniti alias atque tempora dolor sed eveniet voluptatum magni qui veritatis culpa quo voluptatem illum, cumque reiciendis aut? Non fugit saepe incidunt a." userId="ai"/>
-        <Message text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque enim quaerat, quas excepturi temporibus consectetur maiores deleniti alias atque tempora dolor sed eveniet voluptatum magni qui veritatis culpa quo voluptatem illum, cumque reiciendis aut? Non fugit saepe incidunt a." userId="L7egZf4DoZOYLeHLwN8ZAaKNg4o"/> 
-        <Message text="I've been trying to get hold of you since" userId="L7egZf4DoZOYLeHLwN8ZAaKNg4o1"/>       
+        {
+            msg.map((item, id) => (
+                <Message text={item.text} key={id} userId={item?.id}/>
+            ))
+        }
     </div>
   )
 }
