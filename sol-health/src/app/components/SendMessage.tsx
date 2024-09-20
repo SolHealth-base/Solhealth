@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 
 const SendMessage = ({ sendMessages } : {
-  sendMessages: any
+  sendMessages: Dispatch<SetStateAction<{
+    id: string;
+    text: string;
+}[]>>
 }) => {
 
   const [text, setText] = useState('')
   const handleSubmit = () => {
-    sendMessages((prev: any) => [...prev, {
+    sendMessages((prev: {id: string,
+      text: string}[]) => [...prev, {
       id: '',
       text: text
     }])

@@ -29,7 +29,10 @@ const getData = async (url : string, query: string) => {
     }
 }
 const Chat =  () => {
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<{
+    id: string,
+    text: string
+  }[]>([]);
 console.log(messages)
   useEffect(()=>{
     if(messages[messages.length - 1]?.text === undefined) return

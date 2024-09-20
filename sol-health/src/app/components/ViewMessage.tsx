@@ -17,7 +17,10 @@ const Message = ({ text, userId } : {
 }
 
 const Messages = ({ msg } :{
-    msg: any[]
+    msg: {
+        text: string,
+        id: string
+    }[]
 }) => {
 
   return (
