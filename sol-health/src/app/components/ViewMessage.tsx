@@ -24,7 +24,7 @@ const Messages = ({ msg } :{
 }) => {
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 min-h-8 pb-[150px]">
         {
             msg.map((item, id) => (
                 <Message text={item.text} key={id} userId={item?.id}/>

@@ -14,8 +14,10 @@ const getData = async (url : string, query: string) => {
           'Content-Type': 'application/json', // Specify that we are sending JSON
         },
         body: JSON.stringify(data), // Convert data to JSON string
+        cache: 'no-store'
       });
   
+      // console.log('hi')
       // Check if response is OK
       if (response.ok) {
         const jsonResponse = await response.json(); // Parse the JSON response
@@ -33,24 +35,44 @@ const Chat =  () => {
     id: string,
     text: string
   }[]>([]);
-console.log(messages)
-  useEffect(()=>{
-    if(messages[messages.length - 1]?.text === undefined) return
-    const jj = getData('http://34.226.123.43/chat', messages[messages.length - 1]?.text);
-    jj.then(res => setMessages(prev => [...prev, {
-      id: 'ai',
-      text: res?.response
-    }]))
-  }, [messages])
+// console.log(messages)
+
+const fetchMsg = (e: string) => {
+  // console.log(e)
+  if(!e) return
+  setMessages(prev => [...prev, {
+    text: e,
+    id: 'a'
+  }])
+  const jj = getData('http://44.204.195.204/chat', e);
+  jj.then(res => {
+    // console.log(res?.response);
+    setMessages(prev => [...prev, {
+      text: res?.response,
+      id: 'ai'
+    }])
+  });
+
+}
+ 
   return (
     <div className='relative'>
-      <div className=" mt-20">
+      <div className="min-h-40 mt-20">
       {/* overflow-y-auto h-[70vh] pb-20 */}
         <Messages msg={messages}/>
       </div>
-      <SendMessage sendMessages={setMessages} />
+      <SendMessage upwardMsg={fetchMsg}  />
     </div>
   )
 }
-
+// sendMessages={setMessages}
 export default Chat
+
+ // useEffect(()=>{
+  //   if(messages[messages.length - 1]?.text === undefined) return
+  //   const jj = getData('http://34.226.123.43/chat', messages[messages.length - 1]?.text);
+  //   jj.then(res => setMessages(prev => [...prev, {
+  //     id: 'ai',
+  //     text: res?.response
+  //   }]))
+  // }, [messages])
