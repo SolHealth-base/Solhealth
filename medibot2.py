@@ -79,7 +79,7 @@ def pubmed_search(query: str):
     Returns the top articles and links to their abstracts.
     PubMed is a trusted source for peer-reviewed medical research articles.
     """
-    handle = Entrez.esearch(db="pubmed", term=query, retmax=3)
+    handle = Entrez.esearch(db="pubmed", term=query, retmax=1)
     record = Entrez.read(handle)
     handle.close()
 
@@ -105,7 +105,7 @@ def web_search(query: str):
     search = GoogleSearch({
         **serpapi_params,
         "q": query,
-        "num": 5
+        "num": 2
     })
     results = search.get_dict()["organic_results"]
 
@@ -131,14 +131,14 @@ def drug_search(query: str):
         results_container = soup.find('div', class_="searchresults main")
         
         if results_container:
-            items = results_container.find_all('li', limit=3)
+            items = results_container.find_all('li', limit=1)
             results = [item.find('a') for item in items]
             links = [link['href'] for link in results]
 
             # Fetch drug information (requires implementation of drug_info method)
             drugs_info = drug_info(links)
 
-            return f"Top RxList search results for '{query}':\n{drugs_info}"
+            return drugs_info
         else:
             return "No relevant RxList results found."
     else:
@@ -173,19 +173,16 @@ def medical_response(response: str, research_steps):
     return response
 
 
-system_prompt = """You are the oracle, the great AI decision maker.
-Given the user's query you must decide what to do with it based on the
-list of tools provided to you.
+system_prompt = """You are the oracle, the ultimate AI decision-maker. Your role is to handle the user's query using the following steps:
 
-If you see that a tool has been used (in the scratchpad) with a particular
-query, do NOT use that same tool with the same query again. Also, do NOT use
-any tool more than twice (ie, if the tool appears in the scratchpad twice, do
-not use it again).
-
-You should aim to collect information from a diverse range of sources if you don't
-have sufficient information before providing the answer to the user. Once you have 
-sufficient information to answer the user's question (stored in the scratchpad) 
-use the medical_response tool."""
+Steps:
+1.  Direct Response: If you have enough knowledge from your internal base to answer the query, respond directly without using any external tools.
+2.  Web Search: If more information is needed beyond what you know, begin by conducting a web search.
+3.  Tool Use: Only resort to specialized tools (e.g., drug_search, pubmed_search) if the web search does not provide sufficient information.
+4.  Drug-Related Queries: Use the drug tool exclusively for drug-related questions.
+5.  Tool Usage Limit: Avoid using the same tool more than once for the same query.
+6.  Efficiency: If the web search gives enough information, avoid using further tools. Otherwise, choose the most relevant tool to continue.
+7.  Diverse Sources: Prioritize collecting information from a variety of resources to provide a well-rounded answer."""
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", system_prompt),
