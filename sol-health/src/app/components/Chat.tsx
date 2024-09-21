@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import SendMessage from "./SendMessage"
 import Messages from "./ViewMessage"
 
