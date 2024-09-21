@@ -26,7 +26,7 @@ const getData = async (url : string, query: string) => {
       }
   }
 const Check = async () => {
-    const jj = await getData('http://44.204.195.204/chat', 'hey');
+    const jj = await getData('https://44.204.195.204/chat', 'hey');
     console.log(jj)
     console.log('hi')
   return (
