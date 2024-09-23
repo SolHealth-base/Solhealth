@@ -1,27 +1,31 @@
-/////////////////////////////////////////////////////////////
-// COMMENTED BY AI
-
-
-// Import necessary libraries and hooks from React and Solana Wallet Adapter
-import React, { createContext, useContext, useMemo } from 'react';
+'use client'
+import React, { createContext, useContext, useMemo, ReactNode } from 'react';
 import { ConnectionProvider, WalletProvider, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
 
-// Import styles for the Solana wallet adapter UI components
 import '@solana/wallet-adapter-react-ui/styles.css';
 
-// Create a context to store and manage wallet data
-const WalletContext = createContext(null);
+// Define the type for the WalletContext
+type WalletContextType = ReturnType<typeof useSolanaWallet> | null;
+
+// Create a context to store and manage wallet data with the correct type
+const WalletContext = createContext<WalletContextType>(null);
+
+// Define props for the WalletContextProvider component
+interface WalletContextProviderProps {
+    children: ReactNode;
+}
 
 // Create a provider component to wrap around the app and provide wallet functionality
-const WalletContextProvider = ({ children }) => {
+const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children }) => {
     
     // Define the network for the Solana wallet adapter (Devnet in this case, which is for development and testing purposes)
     const network = WalletAdapterNetwork.Devnet;
 
+    
     // Create the endpoint (URL) for connecting to the Solana network based on the selected network
     // useMemo is used to memoize the result and recompute it only if the `network` value changes
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -32,8 +36,11 @@ const WalletContextProvider = ({ children }) => {
         new PhantomWalletAdapter(), // Phantom Wallet is one of the most popular Solana wallets
     ], [network]);
 
+    console.log(wallets)
+
     // Retrieve the current wallet using the Solana wallet adapter hook `useSolanaWallet`
     const wallet = useSolanaWallet();
+    
 
     // Return the wallet context provider, which wraps the child components with wallet functionality
     return (
@@ -63,7 +70,7 @@ const WalletContextProvider = ({ children }) => {
 };
 
 // Hook to access the wallet context in any component within the app
-export const useWallet = () => {
+export const useWallet = (): WalletContextType => {
     const context = useContext(WalletContext);  // Access the context value
 
     // If the context is not within a WalletContextProvider, throw an error
