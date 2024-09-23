@@ -26,7 +26,7 @@ const getData = async (url : string, query: string) => {
       }
   }
 const Hey = async () => {
-    const jj = await getData('https://44.204.195.204/chat', 'hey');
+    const jj = await getData('https://solhealth.sytes.net/chat', 'hey');
     console.log('coming from hey')
     console.log(jj)
   return (

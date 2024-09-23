@@ -44,7 +44,7 @@ const fetchMsg = (e: string) => {
     text: e,
     id: 'a'
   }])
-  const jj = getData('https://44.204.195.204/chat', e);
+  const jj = getData('https://solhealth.sytes.net/chat', e);
   jj.then(res => {
     // console.log(res?.response);
     setMessages(prev => [...prev, {
