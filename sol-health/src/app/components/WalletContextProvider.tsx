@@ -24,7 +24,7 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
     
     // Define the network for the Solana wallet adapter (Devnet in this case, which is for development and testing purposes)
     const network = WalletAdapterNetwork.Devnet;
-    const [walletAddress, setIsWallet] = useLocalStorage<null | string>('wallet-address', null)
+    // const [walletAddress, setIsWallet] = useLocalStorage<null | string>('wallet-address', null)
 
     // Create the endpoint (URL) for connecting to the Solana network based on the selected network
     // useMemo is used to memoize the result and recompute it only if the `network` value changes

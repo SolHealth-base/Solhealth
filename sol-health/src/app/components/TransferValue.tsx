@@ -4,9 +4,9 @@
 'use client'
 import React, { useState, useCallback } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
+import {  PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
-
+//Keypair,
 const TransferSol = () => {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();

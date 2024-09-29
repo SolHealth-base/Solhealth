@@ -1,7 +1,7 @@
 'use client';
 
 // import { useLocalStorage } from "@solana/wallet-adapter-react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import { useLocalStorage } from "../lib/hooks/use-local-storage";
 
 
