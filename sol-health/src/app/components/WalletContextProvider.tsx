@@ -1,6 +1,6 @@
 'use client'
-import React, { createContext, useContext, useMemo, ReactNode } from 'react';
-import { ConnectionProvider, WalletProvider, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
+import React, { createContext, useContext, useMemo, ReactNode, useEffect } from 'react';
+import { ConnectionProvider, WalletProvider, useLocalStorage, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -24,8 +24,8 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
     
     // Define the network for the Solana wallet adapter (Devnet in this case, which is for development and testing purposes)
     const network = WalletAdapterNetwork.Devnet;
+    const [walletAddress, setIsWallet] = useLocalStorage<null | string>('wallet-address', null)
 
-    
     // Create the endpoint (URL) for connecting to the Solana network based on the selected network
     // useMemo is used to memoize the result and recompute it only if the `network` value changes
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -36,12 +36,22 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
         new PhantomWalletAdapter(), // Phantom Wallet is one of the most popular Solana wallets
     ], [network]);
 
-    console.log(wallets)
+    
 
     // Retrieve the current wallet using the Solana wallet adapter hook `useSolanaWallet`
     const wallet = useSolanaWallet();
     
+    useEffect(()=>{
+        if(!wallet.connected){
+            console.log('false')
+        }
+    }, [])
 
+    // useEffect(()=>{
+    //     if(!wallet.connected){
+    //         console.log('false')
+    //     }
+    // }, [])
     // Return the wallet context provider, which wraps the child components with wallet functionality
     return (
         // Provide a connection to the Solana network (Devnet in this case)

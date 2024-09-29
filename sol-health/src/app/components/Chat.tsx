@@ -44,9 +44,9 @@ const fetchMsg = (e: string) => {
     text: e,
     id: 'a'
   }])
-  const jj = getData('https://solhealth.sytes.net/chat', e);
+  const jj = getData('https://ohtf0m9m6e.execute-api.us-east-1.amazonaws.com/dev/chat', e);
   jj.then(res => {
-    // console.log(res?.response);
+    console.log(res?.response);
     setMessages(prev => [...prev, {
       text: res?.response,
       id: 'ai'
