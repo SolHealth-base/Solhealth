@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Auth from "./components/Auth";
+import WalletContextProvider from "./components/WalletContextProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#040715]`}
       >
         <Auth>
-          {children}
+          <WalletContextProvider>
+            {children}
+          </WalletContextProvider>
         </Auth>
       </body>
     </html>

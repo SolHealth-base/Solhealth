@@ -70,7 +70,7 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
 
                         {/* Add a wallet connect button to the top right corner of the app */}
                         <div className="fixed top-0 right-0 m-4">
-                            <WalletMultiButton />  {/* Button that allows users to connect/disconnect their wallet */}
+                            {/* <WalletMultiButton />  Button that allows users to connect/disconnect their wallet */}
                         </div>
                     </WalletContext.Provider>
                 </WalletModalProvider>
