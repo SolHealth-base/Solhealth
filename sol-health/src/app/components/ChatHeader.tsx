@@ -17,7 +17,7 @@ const ChatHeader = () => {
                     width={75.3}
                 />
             </div>
-            <h3 className="text-[#FFFFFF] w-[100%] px-4 text-center mx-auto">I'm here to support with any health-related questions you may have.</h3>
+            <h3 className="text-[#FFFFFF] w-[100%] px-4 text-center mx-auto">I&apos;m here to support with any health-related questions you may have.</h3>
             <h3 className="text-[#FFFFFF] w-[100%] px-4 text-center mx-auto">How can I help you?</h3>
         </div>
     </div>

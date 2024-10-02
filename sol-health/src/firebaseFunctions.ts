@@ -13,5 +13,5 @@ export const createAccount = async (address : string) => {
     const docRef = await addDoc(collection(db, docColName), {
         walletAddress: address,
     });
-    console.log("Account created for", address);
+    console.log("Account created for", address, docRef.id);
 }
