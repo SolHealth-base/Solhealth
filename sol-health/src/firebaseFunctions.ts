@@ -8,7 +8,7 @@ export const createAccount = async (address : string) => {
 
     const querySnapshot = await getDocs(q);
 
-    if(querySnapshot.docs.length) return
+    if(querySnapshot.docs.length >= 1 ) return
     
     const docRef = await addDoc(collection(db, docColName), {
         walletAddress: address,
