@@ -1,8 +1,7 @@
 'use client';
 
 import { useLocalStorage, useWallet } from "@solana/wallet-adapter-react";
-import React, { useEffect, useState } from "react";
-import LoadingPage from "./LoadingPage";
+import React, { useEffect, } from "react";
 import { useRouter } from "next/navigation";
 
 const ProtectedRoute = ( { children } : {

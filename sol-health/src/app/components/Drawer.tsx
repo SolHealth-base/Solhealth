@@ -11,7 +11,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import ConnectWallet from "./ConnectWallet"
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 export function DrawerDemo() {
 

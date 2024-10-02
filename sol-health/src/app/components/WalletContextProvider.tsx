@@ -1,6 +1,6 @@
 'use client';
-import React, { createContext, useContext, useMemo, ReactNode, useEffect, useRef, useState } from 'react';
-import { ConnectionProvider, WalletProvider, useLocalStorage, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
+import React, { createContext, useContext, useMemo, ReactNode, useEffect, useState } from 'react';
+import { ConnectionProvider, WalletProvider, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
