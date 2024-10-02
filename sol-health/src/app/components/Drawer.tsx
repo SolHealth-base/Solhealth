@@ -36,8 +36,8 @@ export function DrawerDemo() {
             {/* <Button>Submit</Button> */}
             <DrawerClose asChild>
               {/* <WalletMultiButton /> */}
-              <ConnectWallet />
-              {/* <button className='max-w-[350px] p-2.5 rounded-[10px] bg-[#FFFFFF] w-[60%] mx-auto text-[#001354]'>Cancel</button> */}
+        
+              <button className='max-w-[350px] p-2.5 rounded-[10px] bg-[#FFFFFF] w-[60%] mx-auto text-[#001354] mb-6'>Cancel</button>
             </DrawerClose>
           </DrawerFooter>
         </div>

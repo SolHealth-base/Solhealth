@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Auth from "./components/Auth";
 import WalletContextProvider from "./components/WalletContextProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 const geistSans = localFont({
@@ -33,9 +34,9 @@ export default function RootLayout({
       >
         <Auth>
           <WalletContextProvider>
-          {/* <TestContext> */}
-            {children}
-          {/* </TestContext> */}
+            <ProtectedRoute>
+              {children}
+            </ProtectedRoute>
           </WalletContextProvider>
         </Auth>
       </body>

@@ -7,6 +7,7 @@ import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-r
 import { clusterApiUrl } from '@solana/web3.js';
 
 import '@solana/wallet-adapter-react-ui/styles.css';
+import LoadingPage from './LoadingPage';
 
 // Define the type for the WalletContext
 type WalletContextType = ReturnType<typeof useSolanaWallet> | null;
@@ -22,11 +23,17 @@ interface WalletContextProviderProps {
 // Create a provider component to wrap around the app and provide wallet functionality
 const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children }) => {
     const [domLoaded, setDomLoaded] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
       setDomLoaded(true);
     }, []);
     
+    useEffect(()=>{
+        setTimeout(()=>{
+            setIsLoading(true)
+        }, 5000)
+    }, [])
+
     const network = WalletAdapterNetwork.Devnet;
     // const [walletAddress, setIsWallet] = useLocalStorage<null | string>('wallet-address', null)
   
@@ -45,7 +52,7 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
     // Retrieve the current wallet using the Solana wallet adapter hook `useSolanaWallet`
     const wallet = useSolanaWallet();
 
-
+    if(!isLoading) return <LoadingPage />
     return (
         // Provide a connection to the Solana network (Devnet in this case)
         <ConnectionProvider endpoint={endpoint}>
@@ -63,7 +70,7 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
 
                         {/* Add a wallet connect button to the top right corner of the app */}
                         <div className="fixed top-0 right-0 m-4">
-                           <WalletMultiButton /> 
+                           {domLoaded && <WalletMultiButton /> }
                         </div>
                     </WalletContext.Provider>
                 </WalletModalProvider>
