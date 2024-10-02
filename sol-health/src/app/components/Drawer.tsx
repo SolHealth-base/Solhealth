@@ -11,6 +11,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import ConnectWallet from "./ConnectWallet"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 export function DrawerDemo() {
 
@@ -29,11 +30,14 @@ export function DrawerDemo() {
           <div className="w-full pb-0 mx-auto text-center">
             {/* connect button rendered here */}
             <ConnectWallet />
+            {/* <WalletMultiButton /> */}
           </div>
           <DrawerFooter>
             {/* <Button>Submit</Button> */}
             <DrawerClose asChild>
-              <button className='max-w-[350px] p-2.5 rounded-[10px] bg-[#FFFFFF] w-[60%] mx-auto text-[#001354]'>Cancel</button>
+              {/* <WalletMultiButton /> */}
+              <ConnectWallet />
+              {/* <button className='max-w-[350px] p-2.5 rounded-[10px] bg-[#FFFFFF] w-[60%] mx-auto text-[#001354]'>Cancel</button> */}
             </DrawerClose>
           </DrawerFooter>
         </div>

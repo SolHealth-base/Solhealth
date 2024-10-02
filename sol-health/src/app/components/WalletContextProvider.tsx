@@ -1,6 +1,6 @@
-'use client'
-import React, { createContext, useContext, useMemo, ReactNode, useEffect } from 'react';
-import { ConnectionProvider, WalletProvider, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
+'use client';
+import React, { createContext, useContext, useMemo, ReactNode, useEffect, useRef, useState } from 'react';
+import { ConnectionProvider, WalletProvider, useLocalStorage, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -21,11 +21,15 @@ interface WalletContextProviderProps {
 
 // Create a provider component to wrap around the app and provide wallet functionality
 const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children }) => {
+    const [domLoaded, setDomLoaded] = useState(false);
+
+    useEffect(() => {
+      setDomLoaded(true);
+    }, []);
     
-    // Define the network for the Solana wallet adapter (Devnet in this case, which is for development and testing purposes)
     const network = WalletAdapterNetwork.Devnet;
     // const [walletAddress, setIsWallet] = useLocalStorage<null | string>('wallet-address', null)
-
+  
     // Create the endpoint (URL) for connecting to the Solana network based on the selected network
     // useMemo is used to memoize the result and recompute it only if the `network` value changes
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -40,19 +44,8 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
 
     // Retrieve the current wallet using the Solana wallet adapter hook `useSolanaWallet`
     const wallet = useSolanaWallet();
-    
-    useEffect(()=>{
-        if(!wallet.connected){
-            console.log('false')
-        }
-    }, [])
 
-    // useEffect(()=>{
-    //     if(!wallet.connected){
-    //         console.log('false')
-    //     }
-    // }, [])
-    // Return the wallet context provider, which wraps the child components with wallet functionality
+
     return (
         // Provide a connection to the Solana network (Devnet in this case)
         <ConnectionProvider endpoint={endpoint}>
@@ -70,7 +63,7 @@ const WalletContextProvider: React.FC<WalletContextProviderProps> = ({ children 
 
                         {/* Add a wallet connect button to the top right corner of the app */}
                         <div className="fixed top-0 right-0 m-4">
-                            {/* <WalletMultiButton />  Button that allows users to connect/disconnect their wallet */}
+                           <WalletMultiButton /> 
                         </div>
                     </WalletContext.Provider>
                 </WalletModalProvider>

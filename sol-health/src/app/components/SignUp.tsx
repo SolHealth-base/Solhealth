@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { DrawerDemo } from "./Drawer"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 const SignUp = () => {
   return (

@@ -4,6 +4,7 @@ import "./globals.css";
 import Auth from "./components/Auth";
 import WalletContextProvider from "./components/WalletContextProvider";
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
       >
         <Auth>
           <WalletContextProvider>
+          {/* <TestContext> */}
             {children}
+          {/* </TestContext> */}
           </WalletContextProvider>
         </Auth>
       </body>
