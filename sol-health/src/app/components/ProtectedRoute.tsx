@@ -3,6 +3,7 @@
 import { useLocalStorage, useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, } from "react";
 import { useRouter } from "next/navigation";
+import { createAccount } from "@/firebaseFunctions";
 
 const ProtectedRoute = ( { children } : {
     children: React.ReactNode
@@ -14,6 +15,10 @@ const ProtectedRoute = ( { children } : {
 
     useEffect(()=>{
         setValue(publicKey?.toString())
+        console.log(publicKey?.toString())
+        if(publicKey?.toString()){
+            createAccount(publicKey?.toString())
+        }
     }, [connected])
     // if(isLoading && value === null) return <LoadingPage />
     // console.log(value)

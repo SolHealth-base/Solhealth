@@ -2,6 +2,7 @@
 import { useState } from "react"
 import SendMessage from "./SendMessage"
 import Messages from "./ViewMessage"
+import ChatHeader from "./ChatHeader"
 
 const getData = async (url : string, query: string) => {
   const data = {
@@ -57,8 +58,8 @@ const fetchMsg = (e: string) => {
  
   return (
     <div className='relative'>
+      <ChatHeader />
       <div className="min-h-40 mt-20">
-      {/* overflow-y-auto h-[70vh] pb-20 */}
         <Messages msg={messages}/>
       </div>
       <SendMessage upwardMsg={fetchMsg}  />
