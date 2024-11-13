@@ -1,13 +1,13 @@
 // import Chat from "../components/Chat"
 // import ProtectedRoute from "../components/ProtectedRoute"
-import SignUp from "../components/SignUp"
+import SignUp from "@/views/SignUp";
 
 const page = () => {
   return (
     // <ProtectedRoute>
-        <SignUp />
+    <SignUp />
     // </ProtectedRoute>
-  )
-}
+  );
+};
 
-export default page
+export default page;

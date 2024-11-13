@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Auth from "./components/Auth";
-import WalletContextProvider from "./components/WalletContextProvider";
-import ProtectedRoute from "./components/ProtectedRoute";
-
+import Auth from "@/components/Auth";
+import WalletContextProvider from "@/providers/WalletContextProvider";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -34,9 +33,7 @@ export default function RootLayout({
       >
         <Auth>
           <WalletContextProvider>
-            <ProtectedRoute>
-              {children}
-            </ProtectedRoute>
+            <ProtectedRoute>{children}</ProtectedRoute>
           </WalletContextProvider>
         </Auth>
       </body>
