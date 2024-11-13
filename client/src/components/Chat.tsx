@@ -7,9 +7,10 @@ import ChatHeader from "@/views/Chat/ChatHeader";
 type Response = {
   response: string;
 };
+export type Sender = "ai" | "user";
 
-type Message = {
-  id: string;
+export type Message = {
+  id: Sender;
   text: string;
 };
 
@@ -42,21 +43,20 @@ const getData = async (url: string, query: string) => {
 };
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  // console.log(messages)
 
-  const fetchMsg = (e: string) => {
+  const fetchMsg = (question: string) => {
     // console.log(e)
-    if (!e) return;
+    if (!question) return;
     setMessages((prev) => [
       ...prev,
       {
-        text: e,
-        id: "a",
+        text: question,
+        id: "user",
       },
     ]);
     const data = getData(
       "https://ohtf0m9m6e.execute-api.us-east-1.amazonaws.com/dev/chat",
-      e
+      question
     );
     data.then((res) => {
       console.log(res?.response);
@@ -77,7 +77,7 @@ const Chat = () => {
       <div className="min-h-40 mt-20">
         <Messages msg={messages} />
       </div>
-      <SendMessage upwardMsg={fetchMsg} />
+      <SendMessage sendMsg={fetchMsg} />
     </div>
   );
 };
