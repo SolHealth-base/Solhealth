@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from app.config import config
+from backend.utils.config import config
 from pymongo.server_api import ServerApi
 
 

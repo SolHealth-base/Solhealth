@@ -1,7 +1,7 @@
 import os
 import sys
 from flask import Flask, jsonify, request
-from app.services.chatbot_service import handle_user_message
+from backend.services.chatbot_service import handle_user_message
 from flask_cors import CORS
 
 

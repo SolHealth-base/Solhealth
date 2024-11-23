@@ -22,8 +22,8 @@ from typing import TypedDict, Annotated, List
 from langchain_core.agents import AgentAction
 from langchain_core.messages import BaseMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from app.utils.mongo_helper import retrieve_consersation, get_conversation_ids, move_data_from_redis_to_mongodb
-from app.utils.redis_helper import get_conversation, update_conversation, init_reddis_storage, reddis_init_storage_with_mongo
+from backend.utils.mongo_helper import retrieve_consersation, get_conversation_ids, move_data_from_redis_to_mongodb
+from backend.utils.redis_helper import get_conversation, update_conversation, init_reddis_storage, reddis_init_storage_with_mongo
 
 
 # Load environment variables
@@ -62,10 +62,9 @@ def drug_info(links):
             result = f"Summary:\n{summary}\n\nUses:\n{uses}"
             results.append(result)
 
-    # Join all results and return the final response
     final_response = "\n\n---\n\n".join(results)
-
     return final_response
+
 
 def extract_pubmed_abstract(links):
 
@@ -158,19 +157,6 @@ def drug_search(query: str):
     else:
         return "Failed to retrieve RxList results."
     
-# @tool("query_rewrite")
-# def query_rewrite(user_query: str):
-#     """
-#     Rewrites the user's medical query by correcting any typographical errors and improving clarity 
-#     to ensure the query is easily understood and more precise.
-    
-#     - `user_query`: The original query from the user, which may contain typos or unclear phrasing.
-#     """
-#     # Use language processing techniques or external services to correct and improve the query.
-#     corrected_query = correct_typo_and_improve_clarity(user_query)
-    
-#     return corrected_query
-
 
 @tool("medical_response")
 def medical_response(response: str, research_steps):
