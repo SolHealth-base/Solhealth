@@ -29,6 +29,12 @@ class ProductionConfig:
     MONGO_URI = os.environ.get("MODEL_URI")
     REDIS_ENDPOINT = os.environ.get("REDIS_ENDPOINT")
 
+    redis_host = os.environ.get("REDIS_HOST")
+    redis_port = os.environ.get("REDIS_PORT")
+    postgres_host = os.environ.get("POSTGRES_HOST")
+    postgress_username = os.environ.get("POSTGRES_USERNAME")
+    postgress_password = os.environ.get("POSTGRES_PASSWORD")
+
 
 
 config = {"development": DevelopmentConfig,

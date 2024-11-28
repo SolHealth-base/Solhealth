@@ -26,3 +26,11 @@ def test_resd_write_access():
 
     except Exception as e:
         raise Exception("Unable to find the document due to the following error: ", e)
+    
+
+
+# with app.app_context():
+#     user = User(username='JohnDoe', wallet_address='0x1244444')
+#     db.session.add(user)
+#     db.session.commit()
+#     print("=============================")
