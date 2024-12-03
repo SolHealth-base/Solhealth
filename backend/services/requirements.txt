@@ -1,0 +1,9 @@
+flask 
+flask_sqlalchemy 
+langchain_groq 
+python-dotenv
+langchain
+langchain_core
+langchain_community
+psycopg2-binary
+zappa
