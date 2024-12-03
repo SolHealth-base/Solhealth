@@ -75,4 +75,4 @@ def generate_title(first_query):
                                           and nothing else""")
     prompt = prompt.format_prompt(query = first_query)
     title = llm.invoke(prompt)
-    return title
+    return title.content
